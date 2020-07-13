@@ -8,10 +8,12 @@
 SERVER	=	serverJ2T3
 CLIENT	=	clientJ2T3
 
-S_SRC	=	src/server/main.c
+S_SRC	=	src/server/main.c	\
+			src/server/core.c
 S_OBJ	=	$(S_SRC:.c=.o)
 
-C_SRC	=	src/client/main.c
+C_SRC	=	src/client/main.c	\
+			src/client/core.c
 C_OBJ	=	$(C_SRC:.c=.o)
 
 INC	=	-Iinclude
