@@ -5,3 +5,5 @@ clientJ2T3
 *.o
 BuildTest
 map
+.vscode
+.DS_Store
