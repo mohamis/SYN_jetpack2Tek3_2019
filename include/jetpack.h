@@ -18,7 +18,7 @@ typedef struct func_s
 
 }   func_t;
 
-void getLser(char *lines);
+void getID(char *lines);
 void quit_finish(char *lines);
 void pwd(char *lines);
 void help_command(char *lines);

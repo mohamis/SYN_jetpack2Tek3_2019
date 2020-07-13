@@ -9,7 +9,7 @@
 #define PIPE_H_
 
 static func_t func[] = {
-    {"ID", &getID, 0},
+    {"ID", &getID, 1},
     {"FINISH", &quit_finish, 0},
     {"COIN", &coin, 1},
     {"PLAYER", &player, 1},

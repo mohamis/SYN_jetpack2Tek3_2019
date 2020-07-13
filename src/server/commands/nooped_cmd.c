@@ -12,6 +12,11 @@ void ready(__attribute__((unused)) char *lines)
     dprintf(tft_client, "READY\r\n");
 }
 
+void getID(__attribute__((unused)) char *lines)
+{
+    dprintf(tft_client, "PLAYER <ID>\r\n");
+}
+
 void player(__attribute__((unused)) char *lines)
 {
     dprintf(tft_client, "PLAYER <ID>\r\n");
