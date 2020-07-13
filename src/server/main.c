@@ -39,9 +39,9 @@ void help_errors(int ac, char **av)
 int main(int ac, char **av)
 {
     help_errors(ac, av);
-    core(av);
+    core(atoi(av[2]));
 
-    // if (close(tft_server) == -1)
-    //     perror("error");
+    if (close(tft_server) == -1)
+        perror("error");
     return 0;
 }
