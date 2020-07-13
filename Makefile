@@ -8,8 +8,15 @@
 SERVER	=	serverJ2T3
 CLIENT	=	clientJ2T3
 
-S_SRC	=	src/server/main.c	\
-			src/server/core.c
+S_SRC	=	src/server/main.c		\
+			src/server/commands/finish.c \
+			src/server/parsing/parsing.c \
+			src/server/parsing/utils.c \
+			src/server/sockets/server.c \
+			src/server/sockets/sockets.c \
+			src/server/sockets/connect.c \
+			src/server/commands/map.c \
+			src/server/commands/nooped_cmd.c
 S_OBJ	=	$(S_SRC:.c=.o)
 
 C_SRC	=	src/client/main.c	\
@@ -21,7 +28,7 @@ LIB	=	-L .
 
 CFLAGS	=	-W -Wall -Wextra -ggdb3 -g3
 
-CC	=	gcc $(INC) $(LIB) $(CFLAGS)
+CC	=	gcc $(INC) $(CFLAGS)
 RM	=	rm -f
 
 all:	$(SERVER)

@@ -8,6 +8,10 @@
 #ifndef INCLUDES_H_
 #define INCLUDES_H_
 
+int usr;
+int tft_client, tft_server;
+typedef struct protoent proto_t;
+
 #include <stdlib.h>
 #include <dirent.h>
 #include <string.h>

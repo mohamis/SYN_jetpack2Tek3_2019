@@ -1,5 +1,16 @@
 {
     "files.associations": {
-        "complex": "cpp"
+        "complex": "cpp",
+        "jetpack.h": "c",
+        "pipe.h": "c",
+        "sockets.h": "c",
+        "array": "c",
+        "iterator": "c",
+        "string": "c",
+        "string_view": "c",
+        "vector": "c",
+        "utils.h": "c",
+        "includes.h": "c",
+        "*.tcc": "cpp"
     }
 }
