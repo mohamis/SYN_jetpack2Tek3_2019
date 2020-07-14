@@ -20,5 +20,4 @@ static func_t func[] = {
     {NULL, NULL, 0}
 };
 
-
 #endif /* !PIPE_H_ */
