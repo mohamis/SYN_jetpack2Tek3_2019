@@ -26,12 +26,12 @@ void help_errors(int ac, char **av)
         if (ac != 7) {
             printf("Arguments invalides\n");
             printf("%d",ac);
-            exit(1);
+            exit(84);
         }
         if ((file = fopen(av[6],"r")) == NULL) {
             printf("Map invalide\n");
             fclose(file);
-            exit(1);
+            exit(84);
         }
     }
 }

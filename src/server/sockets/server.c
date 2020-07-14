@@ -24,7 +24,7 @@ void check_protocol(int port, proto_t *proto)
     }
     sockets_init(port);
     listen_lines();
-}
+} 
 
 void fork_iter(void)
 {
