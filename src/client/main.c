@@ -19,9 +19,9 @@ void help_errors(int ac, char **av)
         printf("\n");
         exit(0);
     } else {
-        if (ac != 6) {
+        if (ac != 5) {
             perror("Arguments invalides\n");
-            exit(1);
+            exit(84);
         }
     }
 }
