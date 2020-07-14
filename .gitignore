@@ -1,5 +1,6 @@
-serverJ2T3
-clientJ2T3
-BuildTest
 map
+BuildTest
 .vscode
+.DS_Store
+*.o
+test
