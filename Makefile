@@ -20,7 +20,9 @@ S_SRC	=	src/server/main.c		\
 S_OBJ	=	$(S_SRC:.c=.o)
 
 C_SRC	=	src/client/main.c	\
-			src/client/core.c
+			src/client/create_client.c\
+			src/client/manage_args.c
+
 C_OBJ	=	$(C_SRC:.c=.o)
 
 INC	=	-Iinclude

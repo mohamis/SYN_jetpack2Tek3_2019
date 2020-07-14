@@ -18,20 +18,17 @@ void help_errors(int ac, char **av)
         on which the server socket listens");
         printf("\n");
         exit(0);
-    } else {
-        if (ac != 5) {
-            perror("Arguments invalides\n");
-            exit(84);
-        }
     }
 }
 
 int main(int ac, char **av)
 {
-    help_errors(ac, av);
-    core();
+    client_t *cli;
 
-    // if (close(tft_server) == -1)
-    //     perror("error");
-    return 0;
+    help_errors(ac, av);
+    cli = my_malloc(sizeof(client_t));
+    start_client(cli);
+    manage_args(cli, ac, av);
+    set_connection(cli);
+    return (0);
 }
