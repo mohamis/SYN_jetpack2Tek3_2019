@@ -11,6 +11,8 @@
         "vector": "c",
         "utils.h": "c",
         "includes.h": "c",
+        "jetpack_client.h": "c",
+        "jetpack_graph.h": "c",
         "*.tcc": "cpp"
     }
 }
