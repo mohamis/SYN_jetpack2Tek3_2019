@@ -9,7 +9,7 @@
 #include "jetpack.h"
 #include "sockets.h"
 
-int read_lines()
+int read_lines(server_t *server)
 {
     dprintf(tft_client, "ALLO C LE SERVEUR.\r\n");
     FILE *file = fdopen(dup(tft_client), "r");
@@ -21,15 +21,16 @@ int read_lines()
             fclose(file);
             free(lines);
         }
-        fprintf(stderr, "%s", lines);
-        remove_delim(lines);
+        fprintf(stderr, "%d", server->log);
+        remove_delim(lines, server);
         if (strcmp(lines, "FINISH") == 0 )
             break;
     }
     free(lines);
     fclose(file);
-    if (fcntl(tft_client, F_GETFD) != -1)
-        close(tft_client);
+    close(tft_client);
+    // if (fcntl(tft_client, F_GETFD) != -1)
+    //     close(tft_client);
     exit (0);
 }
 

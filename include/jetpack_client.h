@@ -21,9 +21,6 @@
 #include <stdio.h>
 #include <string.h>
 
-int core();
-int errors(char **arg);
-
 typedef struct cmd_s
 {
     char *tmp;

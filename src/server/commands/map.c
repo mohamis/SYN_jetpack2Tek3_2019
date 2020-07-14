@@ -7,7 +7,7 @@
 
 #include "jetpack.h"
 
-void map_files(__attribute__((unused)) char *lines)
+void map_files(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
     DIR *d;
     struct dirent *dir;

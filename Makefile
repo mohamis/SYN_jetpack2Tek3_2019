@@ -17,6 +17,7 @@ S_SRC	=	src/server/main.c		\
 			src/server/sockets/sockets.c \
 			src/server/sockets/connect.c \
 			src/server/commands/map.c \
+			src/server/utils/utilities.c \
 			src/server/commands/nooped_cmd.c
 S_OBJ	=	$(S_SRC:.c=.o)
 

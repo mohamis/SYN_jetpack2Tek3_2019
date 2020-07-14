@@ -12,6 +12,5 @@
 
 void sockets_init(int port);
 void listen_lines(void);
-int read_lines(void);
 
 #endif /* !SOCKETS_H_ */

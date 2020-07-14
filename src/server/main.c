@@ -36,10 +36,23 @@ void help_errors(int ac, char **av)
     }
 }
 
+void init_struct(server_t *server)
+{
+    server->cx = 0;
+    server->cy = 0;
+    server->saved = 0;
+    server->px = 0;
+    server->py = 0;
+}
+
 int main(int ac, char **av)
 {
     help_errors(ac, av);
-    core(atoi(av[2]));
+    server_t *server = malloc(sizeof(server_t));
+    if (!server)
+        exit (84);
+    init_struct(server);
+    core(atoi(av[2]), server);
 
     if (close(tft_server) == -1)
         perror("error");
