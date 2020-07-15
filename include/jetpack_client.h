@@ -21,40 +21,4 @@
 #include <stdio.h>
 #include <string.h>
 
-typedef struct cmd_s
-{
-    char *tmp;
-    void (*func)(void *, int, char **);
-
-} cmd_t;
-
-typedef struct client_s
-{
-    char s;
-    char rcv;
-    int cli_sock;
-    char *ip;
-    int id;
-    fd_set  fds;
-    int port;
-    fd_set  rdfds;
-    pthread_t thread;
-    cmd_t cmds[MAX_CMD];
-} client_t;
-
-void *my_malloc(size_t size);
-void manage_args(client_t *cli, int ac, char **av);
-void is_err(char *s, int value);
-void start_client(client_t *cli);
-void set_connection(client_t *cli);
-int	str_to_int(char *str);
-double str_to_double(char *str);
-char **separate_str(char *str, char carac);
-char *my_gnl(int fd);
-int my_strcmp2(char *str1, char *str2);
-void free_array(char **array);
-void do_select(client_t *cli);
-void save_cmd(client_t *cli, char *str, void(*func)(client_t *cli, int, char **));
-void id_cmd(client_t *cli, int ac, char **av);
-
 #endif
