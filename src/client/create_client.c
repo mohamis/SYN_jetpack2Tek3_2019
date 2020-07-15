@@ -32,5 +32,14 @@ void set_connection(client_t *cli)
     if (connect(cli->cli_sock, (struct sockaddr *)&server, 
                 sizeof(server)) < 0)
         is_err("connection failed", 1);
+    dprintf(cli->cli_sock, "ID\nMAP\n");
+    do_select(cli);
 }
 
+void save_cmd(client_t *cli, char *str, void(*func)(client_t *cli, int, char **)) {
+            int id = 0;
+            cli->cmds[id].tmp = str;
+            cli->cmds[id].func = (void (*)(void *, int, char **))func;
+            id++;
+}
+    

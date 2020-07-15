@@ -28,6 +28,7 @@ int main(int ac, char **av)
     help_errors(ac, av);
     cli = my_malloc(sizeof(client_t));
     start_client(cli);
+    save_cmd(cli, "id", id_cmd);
     manage_args(cli, ac, av);
     set_connection(cli);
     return (0);
