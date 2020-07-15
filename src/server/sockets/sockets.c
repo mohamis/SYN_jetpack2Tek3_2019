@@ -22,6 +22,7 @@ int read_lines(server_t *server)
             free(lines);
         }
         fprintf(stderr, "%d", server->log);
+        //ici ajouter un concat des donnees log et lines pour send to other client
         remove_delim(lines, server);
         if (strcmp(lines, "FINISH") == 0 )
             break;
@@ -29,8 +30,6 @@ int read_lines(server_t *server)
     free(lines);
     fclose(file);
     close(tft_client);
-    // if (fcntl(tft_client, F_GETFD) != -1)
-    //     close(tft_client);
     exit (0);
 }
 

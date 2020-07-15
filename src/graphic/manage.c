@@ -7,53 +7,41 @@
 
 #include "jetpack_graph.h"
 
-button_t *init_a_button(sfVector2f pos, sfVector2f size)
+message_t *init_a_text(sfVector2f pos, char *t, sfColor color)
 {
-    button_t *button = malloc(sizeof(button_t));
-
+    message_t *button = malloc(sizeof(message_t));
     if (button == NULL)
         return (NULL);
-    button->rect = sfRectangleShape_create();
-    if (button->rect == NULL)
-        return (NULL);
-    button->pos = pos;
-    button->size = size;
-    sfRectangleShape_setPosition(button->rect, button->pos);
-    sfRectangleShape_setSize(button->rect, button->size);
-    sfRectangleShape_setFillColor(button->rect, sfTransparent);
+
+    button->font = sfFont_createFromFile("./font/arial.ttf");
+    if (!button->font)
+        exit (84);
+    button->text = sfText_create();
+    sfText_setString(button->text, t);
+    sfText_setFont(button->text, button->font);
+    sfText_setCharacterSize(button->text, 20);
+    sfText_setPosition(button->text, pos);
+    sfText_setFillColor(button->text, color);
     return (button);
 }
 
-button_t **init_button(void)
+message_t **init_text(char **t)
 {
-    button_t **button = malloc(sizeof(button_t *) * 5);
+    message_t **button = malloc(sizeof(message_t *) * 7);
 
-    button[0] = init_a_button((sfVector2f) {870, 440}, (sfVector2f)
-                                {180, 180});
-    button[1] = init_a_button((sfVector2f) {1834, 44}, (sfVector2f)
-                                {40, 40});
-    button[2] = init_a_button((sfVector2f) {1790, 968}, (sfVector2f)
-                                {70, 70});
-    button[3] = init_a_button((sfVector2f) {1310, 368}, (sfVector2f)
-                                {343, 108});
-    button[4] = NULL;
+    button[0] = init_a_text((sfVector2f) {0, 0}, t[0], sfWhite);
+    button[1] = init_a_text((sfVector2f) {0, 20}, t[1], sfYellow);
+    button[2] = init_a_text((sfVector2f) {0, 40}, t[2], sfCyan);
+    button[3] = init_a_text((sfVector2f) {0, 60}, t[3], sfGreen);
+    button[4] = init_a_text((sfVector2f) {0, 80}, t[4], sfMagenta);
+    button[5] = init_a_text((sfVector2f) {0, 100}, t[5], sfWhite);
+    button[6] = NULL;
     return (button);
 }
 
-int manage_tek3(window_t *window, char *t)
+int manage_infos(window_t *window, message_t **message)
 {
-    window->font = sfFont_createFromFile("./font/arial.ttf");
-    if (!window->font)
-        return (84);
-    window->text = sfText_create();
-    sfText_setString(window->text, t);
-    sfText_setFont(window->text, window->font);
-    sfText_setCharacterSize(window->text, 50);
-    sfRenderWindow_drawText(window->window, window->text, NULL);
+    for (int i = 0; i <= 5; i++)
+        sfRenderWindow_drawText(window->window, message[i]->text, NULL);
     return (0);
-}
-
-int manage_infos(window_t *window)
-{
-    manage_tek3(window, "Legend");
 }

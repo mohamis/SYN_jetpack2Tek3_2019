@@ -7,3 +7,5 @@ test
 graphJ2T3
 clientJ2T3
 serverJ2T3
+vgcore.*
+windowrun.sh
