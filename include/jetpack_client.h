@@ -21,4 +21,7 @@
 #include <stdio.h>
 #include <string.h>
 
+typedef struct client_s
+{
+} client_t;
 #endif

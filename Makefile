@@ -28,14 +28,6 @@ G_SRC	=	src/graphic/window.c		\
 G_OBJ	=	$(G_SRC:.c=.o)
 
 C_SRC	=	src/client/main.c	\
-			src/client/create_client.c \
-			src/client/tools.c	\
-			src/client/do_select.c\
-			src/client/manage_args.c	\
-			src/lib/my/my_gnl.c	\
-			src/lib/my/my_split.c	\
-			src/lib/my/my_strcmp.c	\
-			src/client/cmd/id_cmd.c
 
 C_OBJ	=	$(C_SRC:.c=.o)
 
