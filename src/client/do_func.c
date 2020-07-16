@@ -39,4 +39,13 @@ int map_cmd(char *buffer, client_t *cli)
         free_array(array);
         return (value);
 }
+
+void fire_cmd(client_t *cli)
+{
+    if (cli->state_fire) {
+        cli->state_fire = 0;
+    } else
+        cli->state_fire = 1;
+        
+}
         
