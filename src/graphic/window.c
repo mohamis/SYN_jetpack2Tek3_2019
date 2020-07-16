@@ -21,7 +21,7 @@ window_t *init_game(window_t *window)
     window->seconds = 0;
     window->rectp1 = sfRectangleShape_create();
     window->rectp2 = sfRectangleShape_create();
-    window->gravity = 12;
+    window->gravity = 0;
     window->s_fire = 0;
     window->x_move = 0.0;
     window->y_move = 0.0;
