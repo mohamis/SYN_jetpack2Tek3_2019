@@ -12,6 +12,7 @@
 
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <sys/time.h>
 #include <sys/select.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -19,9 +20,12 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <errno.h>
 #include <string.h>
 
 typedef struct client_s
 {
 } client_t;
 #endif
+
+int my_isnum(char *str);

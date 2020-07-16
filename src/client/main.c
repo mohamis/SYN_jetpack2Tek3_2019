@@ -12,14 +12,13 @@ void my_loop(int sockfd)
     char *buffer;
     int i = 0;
 
-    buffer = malloc(sizeof(char *));
-    for(;;) {
+    for(;1;) {
         bzero(buffer, sizeof(buffer));
-        while((buffer[i++] = getchar()) != '\n' ) {
+        while (buffer[i++] = getchar != '\n') {
             write(sockfd, buffer, sizeof(buffer));
             bzero(buffer, sizeof(buffer));
             read(sockfd, buffer, sizeof(buffer));
-            printf("from server : %s", buffer);
+            //do_func() fonction qui récupere les protocoles
         }
     }
 }
@@ -44,10 +43,13 @@ int my_connect(int ac, char **av)
         exit(0);
     } else
         printf("connected to the server");
+    return(sockfd);
     my_loop(sockfd);
 }
 
 int main(int ac, char **av)
 {
+    if (manage_args(ac, av) == 84)
+        return (84);
     my_connect(ac, av);
 }

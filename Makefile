@@ -28,7 +28,9 @@ G_SRC	=	src/graphic/window.c		\
 G_OBJ	=	$(G_SRC:.c=.o)
 
 C_SRC	=	src/client/main.c	\
-
+			src/client/manage_args.c	\
+			src/client/tools.c	\
+			
 C_OBJ	=	$(C_SRC:.c=.o)
 
 INC	=	-Iinclude
