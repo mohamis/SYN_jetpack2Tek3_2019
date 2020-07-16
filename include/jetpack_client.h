@@ -8,7 +8,26 @@
 #ifndef JETPACK_H_
 #define JETPACK_H_
 
-int core();
-int errors(char **arg);
+#define MAX_CMD 6
 
-#endif /* !JETPACK_H_ */
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <sys/time.h>
+#include <sys/select.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <ctype.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+
+typedef struct client_s
+{
+} client_t;
+#endif
+
+int my_isnum(char *str);
+int manage_args(int ac, char **av);
+int manage_args(int ac, char **av);

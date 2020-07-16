@@ -11,6 +11,15 @@
         "vector": "c",
         "utils.h": "c",
         "includes.h": "c",
-        "*.tcc": "cpp"
+        "jetpack_client.h": "c",
+        "jetpack_graph.h": "c",
+        "*.tcc": "cpp",
+        "exception": "cpp",
+        "functional": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "sstream": "cpp",
+        "system_error": "cpp"
     }
 }

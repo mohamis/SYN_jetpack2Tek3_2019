@@ -26,19 +26,20 @@ void check_protocol(int port, proto_t *proto)
     listen_lines();
 } 
 
-void fork_iter(void)
+void fork_iter(server_t *server)
 {
     int pid = fork();
     if (pid < 0)
         exit(84);
 
-    if (pid == 0)
-        read_lines();
+    if (pid == 0) {
+        read_lines(server);
+    }
     else if (close(tft_client) == -1)
         perror("forked close");
 }
 
-void core(int port)
+void core(int port, server_t *server)
 {
     socklen_t len;
     struct sockaddr_in cli;
@@ -54,7 +55,10 @@ void core(int port)
         if ((tft_client = accept(tft_server,
                                 (struct sockaddr *)&cli, &len)) < 0)
             exit(EXIT_FAILURE);
-        else
-            fork_iter();
+        else {
+            if (server->log <= 2)
+                server->log += 1;
+            fork_iter(server);
+        }
     }
 }

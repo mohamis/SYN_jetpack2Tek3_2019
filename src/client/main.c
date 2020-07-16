@@ -1,37 +1,56 @@
 /*
 ** EPITECH PROJECT, 2020
-** SYN_jetpack2Tek3_2019
+** main
 ** File description:
 ** main
 */
 
-#include "jetpack_client.h"
-#include "includes.h"
+#include "../../include/jetpack_client.h"
 
-void help_errors(int ac, char **av)
+void my_loop(int sockfd)
 {
-    if (av[1] != NULL && strcmp(av[1], "-help") == 0) {
-        printf("USAGE:\t./clientJ2T3 ip port\n");
-        printf("\t-h <ip> used to set <ip> as the IP");
-        printf("\n");
-        printf("\t-p <port> is the port number \
-        on which the server socket listens");
-        printf("\n");
-        exit(0);
-    } else {
-        if (ac != 6) {
-            perror("Arguments invalides\n");
-            exit(1);
+    char *buffer;
+    int i = 0;
+
+    buffer = malloc(sizeof(char *));
+    for(;;){
+        bzero(buffer, sizeof(buffer));
+        while ((buffer[i++] = getchar()) != '\n') {
+            write(sockfd, buffer, sizeof(buffer));
+            bzero(buffer, sizeof(buffer));
+            read(sockfd, buffer, sizeof(buffer));
+            printf("%s\n", buffer);
+            //do_func() fonction qui récupere les protocoles
         }
     }
 }
 
+int my_connect(char **av)
+{
+    int sockfd;
+    struct sockaddr_in servaddr;
+
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd == -1) {
+        printf("fail to create socket\n");
+        exit (0);
+    } else 
+        printf("socket created.\n");
+    bzero(&servaddr, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = inet_addr(av[2]);
+    servaddr.sin_port = htons(atoi(av[4]));
+    if (connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) != 0) {
+        printf("fail to connect with the server\n");
+        exit(0);
+    } else
+        printf("connected to the server");
+    my_loop(sockfd);
+}
+
 int main(int ac, char **av)
 {
-    help_errors(ac, av);
-    core();
-
-    // if (close(tft_server) == -1)
-    //     perror("error");
-    return 0;
+    if (manage_args(ac, av) == 84)
+        return (84);
+    my_connect(av);
 }

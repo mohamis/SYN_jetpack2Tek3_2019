@@ -1,5 +1,12 @@
-serverJ2T3
-clientJ2T3
-BuildTest
 map
+BuildTest
 .vscode
+.DS_Store
+*.o
+test
+graphJ2T3
+clientJ2T3
+serverJ2T3
+vgcore.*
+windowrun.sh
+src/client/*.c~

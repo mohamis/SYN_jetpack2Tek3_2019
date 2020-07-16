@@ -7,32 +7,35 @@
 
 #include "jetpack.h"
 
-void ready(__attribute__((unused)) char *lines)
+void ready(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
     dprintf(tft_client, "READY\r\n");
 }
 
-void getID(__attribute__((unused)) char *lines)
+void getID(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
-    dprintf(tft_client, "PLAYER <ID>\r\n");
+    dprintf(tft_client, "ID %d\r\n", server->log);
 }
 
-void player(__attribute__((unused)) char *lines)
+void player(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
-    dprintf(tft_client, "PLAYER <ID>\r\n");
+    char **thisline = my_str_to_word_array(lines, ' ');
+    server->px = atoi(thisline[1]);
+    server->py = atoi(thisline[2]);
+    dprintf(tft_client, "PLAYER %d %d %d\r\n", server->log, server->px, server->py);
 }
 
-void coin(__attribute__((unused)) char *lines)
+void coin(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
-    dprintf(tft_client, "COIN\r\n");
+    dprintf(tft_client, "COIN %d %d %d\r\n", server->log, server->cx, server->cy);
 }
 
-void fire_dir(__attribute__((unused)) char *lines)
+void fire_dir(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
     dprintf(tft_client, "FIRE\r\n");
 }
 
-void start(__attribute__((unused)) char *lines)
+void start(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
     dprintf(tft_client, "START\r\n");
 }
