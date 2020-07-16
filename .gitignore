@@ -10,3 +10,8 @@ serverJ2T3
 vgcore.*
 windowrun.sh
 src/client/*.c~
+src/graphic/move.c
+src/old_client
+*.json
+*.map
+*.out

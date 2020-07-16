@@ -51,11 +51,12 @@ void core(int port, server_t *server)
         exit(84);
     }
     check_protocol(port, proto);
-    for (;1;) {
+    while (84) {
         if ((tft_client = accept(tft_server,
-                                (struct sockaddr *)&cli, &len)) < 0)
+                                (struct sockaddr *)&cli, &len)) < 0) {
+            close(tft_server);
             exit(EXIT_FAILURE);
-        else {
+        } else {
             if (server->log <= 2)
                 server->log += 1;
             fork_iter(server);

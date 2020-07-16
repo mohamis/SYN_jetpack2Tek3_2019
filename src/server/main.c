@@ -8,6 +8,26 @@
 #include "jetpack.h"
 #include "includes.h"
 
+int errors(int ac, char **av)
+{
+    FILE *file;
+
+    if (ac == 7) {
+        int n = strlen(av[2]);
+        for (int i = 0; i < n; i++) {
+            if (!isdigit(av[2][i])) {
+                exit (84);
+            }
+        } if ((file = fopen(av[6],"r")) == NULL) {
+            fclose(file);
+            exit(84);
+        }
+    } else {
+        exit (84);
+    }
+    return (0);
+}
+
 void help_errors(int ac, char **av)
 {
     if (av[1] != NULL && strcmp(av[1], "-help") == 0) {
@@ -22,14 +42,7 @@ void help_errors(int ac, char **av)
         printf("\n");
         exit(0);
     } else {
-        FILE *file;
-        if (ac != 7) {
-            exit(84);
-        }
-        if ((file = fopen(av[6],"r")) == NULL) {
-            fclose(file);
-            exit(84);
-        }
+        errors(ac, av);
     }
 }
 
@@ -47,11 +60,12 @@ int main(int ac, char **av)
     help_errors(ac, av);
     server_t *server = malloc(sizeof(server_t));
     if (!server)
-        exit (84);
+        exit(84);
     init_struct(server);
     core(atoi(av[2]), server);
 
     if (close(tft_server) == -1)
         perror("error");
+    free(server);
     return 0;
 }
