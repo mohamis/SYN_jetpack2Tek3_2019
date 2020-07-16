@@ -23,7 +23,8 @@ int read_lines(server_t *server)
             remove_delim(lines, server);
             if (strcmp(lines, "FINISH") == 0 )
                 break;
-            free(lines);
+            // else
+            //     free(lines);
         }
         // fprintf(stderr, "%d", server->log);
         //ici ajouter un concat des donnees log et lines pour send to other client
