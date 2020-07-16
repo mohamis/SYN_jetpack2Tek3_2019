@@ -14,6 +14,8 @@ int manage_args(int ac, char **av)
     
     if (ac != 5)
 	    return (84);
-    //if ((strcmp(av[j], "-p")) == 0 && my_isnum(av[j + 1] == 1))
-	  //  return (84);
+    if ((strcmp(av[j], "-p")) != 0 && isdigit(av[j + 1] == 1))
+	    return (84);
+    if ((strcmp(av[i], "-h")) != 0 && av[i + 1] == NULL)
+        return (84);
 }
