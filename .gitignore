@@ -9,3 +9,4 @@ clientJ2T3
 serverJ2T3
 vgcore.*
 windowrun.sh
+src/client/*.c~
