@@ -13,7 +13,7 @@ void my_loop(int sockfd)
     int i = 0;
 
     buffer = malloc(sizeof(char *));
-    for(;1;) {
+    for(;;){
         bzero(buffer, sizeof(buffer));
         while ((buffer[i++] = getchar()) != '\n') {
             write(sockfd, buffer, sizeof(buffer));
@@ -45,7 +45,6 @@ int my_connect(char **av)
         exit(0);
     } else
         printf("connected to the server");
-    return(sockfd);
     my_loop(sockfd);
 }
 
