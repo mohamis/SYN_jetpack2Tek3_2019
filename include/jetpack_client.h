@@ -30,4 +30,3 @@ typedef struct client_s
 
 int my_isnum(char *str);
 int manage_args(int ac, char **av);
-int manage_args(int ac, char **av);

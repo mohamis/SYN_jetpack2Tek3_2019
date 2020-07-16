@@ -10,18 +10,18 @@
 void my_loop(int sockfd)
 {
     char *buffer;
-    int i = 0;
+    int i;
 
     buffer = malloc(sizeof(char *));
     for(;;){
         bzero(buffer, sizeof(buffer));
-        while ((buffer[i++] = getchar()) != '\n') {
+        i = 0;
+        while ((buffer[i++] = getchar()) != '\n');
             write(sockfd, buffer, sizeof(buffer));
             bzero(buffer, sizeof(buffer));
             read(sockfd, buffer, sizeof(buffer));
-            printf("%s\n", buffer);
+            printf("%s", buffer);
             //do_func() fonction qui récupere les protocoles
-        }
     }
 }
 
