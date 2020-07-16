@@ -29,6 +29,8 @@ typedef struct client_s
     char *map;
     int widht;
     int height;
+    char player;
+    int state_fire;
     int finish;
 } client_t;
 #endif
