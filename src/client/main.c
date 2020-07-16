@@ -18,6 +18,7 @@ void my_loop(int sockfd)
             write(sockfd, buffer, sizeof(buffer));
             bzero(buffer, sizeof(buffer));
             read(sockfd, buffer, sizeof(buffer));
+            printf("%s\n", buffer);
             //do_func() fonction qui récupere les protocoles
         }
     }
