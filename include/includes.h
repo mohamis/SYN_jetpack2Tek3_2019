@@ -27,5 +27,6 @@ typedef struct protoent proto_t;
 #include <netdb.h>
 #include <errno.h>
 #include <arpa/inet.h>
+#include <ctype.h>
 
 #endif /* !INCLUDES_H_ */

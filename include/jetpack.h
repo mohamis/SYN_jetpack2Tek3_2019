@@ -5,11 +5,12 @@
 ** jetpack
 */
 
-#include "includes.h"
-#include "utils.h"
-
 #ifndef JETPACK_H_
 #define JETPACK_H_
+
+#include "includes.h"
+#include "utils.h"
+#define MAX_CLIENT 2
 
 typedef struct server_s
 {

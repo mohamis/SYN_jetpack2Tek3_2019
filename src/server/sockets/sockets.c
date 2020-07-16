@@ -19,13 +19,14 @@ int read_lines(server_t *server)
     for (;42;) {
         if (getline(&lines, &i, file) == -1) {
             fclose(file);
+        } else {
+            remove_delim(lines, server);
+            if (strcmp(lines, "FINISH") == 0 )
+                break;
             free(lines);
         }
-        fprintf(stderr, "%d", server->log);
+        // fprintf(stderr, "%d", server->log);
         //ici ajouter un concat des donnees log et lines pour send to other client
-        remove_delim(lines, server);
-        if (strcmp(lines, "FINISH") == 0 )
-            break;
     }
     free(lines);
     fclose(file);
@@ -41,12 +42,16 @@ void sockets_init(int port)
     address.sin_port = ntohs(port);
 
     if (bind(tft_server, (const struct sockaddr *)&address,
-            sizeof(address)) < 0)
-        exit(EXIT_FAILURE);
+            sizeof(address)) < 0) {
+            close(tft_server); 
+            exit(EXIT_FAILURE);
+    }
 }
 
 void listen_lines()
 {
-    if (listen(tft_server, 100) < 0)
-        exit(EXIT_FAILURE);
+    if (listen(tft_server, MAX_CLIENT) == -1) {
+        close(tft_server);
+        perror("listen()");
+    }   
 }

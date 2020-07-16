@@ -46,7 +46,7 @@ void animation_manager(window_t *window)
     window->time = sfClock_getElapsedTime(window->clock);
     window->seconds = window->time.microseconds / 100000.0;
 
-    if (window->seconds > 0.5) {
+    if (window->seconds > 0.0000001) {
         move_player(window, window->rectp1, window->fire);
         move_player(window, window->rectp2, window->s_fire);
         sfRectangleShape_setFillColor(window->rectp1, sfGreen);

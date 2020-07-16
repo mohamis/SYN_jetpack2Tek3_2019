@@ -27,10 +27,7 @@ G_SRC	=	src/graphic/window.c		\
 			src/graphic/destroy.c
 G_OBJ	=	$(G_SRC:.c=.o)
 
-C_SRC	=	src/client/main.c	\
-			src/client/manage_args.c	\
-			src/client/tools.c	\
-			
+C_SRC	=	src/client/main.c
 C_OBJ	=	$(C_SRC:.c=.o)
 
 INC	=	-Iinclude
@@ -57,8 +54,10 @@ $(CLIENT)	:	$(C_OBJ)
 
 clean:
 	$(RM) $(S_OBJ)
+	$(RM) $(G_OBJ)
 	$(RM) $(C_OBJ)
 fclean:	clean
 	$(RM) $(SERVER)
+	$(RM) $(GRAPH)
 	$(RM) $(CLIENT)
 re:	fclean all
