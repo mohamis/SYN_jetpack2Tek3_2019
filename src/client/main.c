@@ -12,9 +12,10 @@ void my_loop(int sockfd)
     char *buffer;
     int i = 0;
 
+    buffer = malloc(sizeof(char *));
     for(;1;) {
         bzero(buffer, sizeof(buffer));
-        while (buffer[i++] = getchar != '\n') {
+        while ((buffer[i++] = getchar()) != '\n') {
             write(sockfd, buffer, sizeof(buffer));
             bzero(buffer, sizeof(buffer));
             read(sockfd, buffer, sizeof(buffer));
@@ -24,7 +25,7 @@ void my_loop(int sockfd)
     }
 }
 
-int my_connect(int ac, char **av)
+int my_connect(char **av)
 {
     int sockfd;
     struct sockaddr_in servaddr;
@@ -52,5 +53,5 @@ int main(int ac, char **av)
 {
     if (manage_args(ac, av) == 84)
         return (84);
-    my_connect(ac, av);
+    my_connect(av);
 }
