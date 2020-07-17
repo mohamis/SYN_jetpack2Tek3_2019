@@ -20,8 +20,9 @@ typedef struct server_s
     int saved;
     int cx;
     int cy;
-    int px;
-    int py;
+    char *px;
+    char *py;
+    char *pathname;
 }   server_t;
 
 typedef struct jetpack

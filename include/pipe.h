@@ -16,7 +16,7 @@ static func_t func[] = {
     {"START", &start, 1},
     {"FIRE", &fire_dir, 1},
     {"READY", &ready, 1},
-    {"MAP", &map_files, 1},
+    {"MAP", &map_files, 0},
     {NULL, NULL, 0}
 };
 

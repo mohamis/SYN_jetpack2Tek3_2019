@@ -27,7 +27,11 @@ G_SRC	=	src/graphic/window.c		\
 			src/graphic/destroy.c
 G_OBJ	=	$(G_SRC:.c=.o)
 
-C_SRC	=	src/client/main.c
+C_SRC	=	src/client/main.c	\
+			src/client/errors.c		\
+			src/client/loop.c		\
+			src/client/receive.c		\
+			src/client/sending.c
 C_OBJ	=	$(C_SRC:.c=.o)
 
 INC	=	-Iinclude

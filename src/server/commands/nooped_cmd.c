@@ -20,9 +20,9 @@ void getID(__attribute__((unused)) char *lines, __attribute__((unused))  server_
 void player(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
     char **thisline = my_str_to_word_array(lines, ' ');
-    server->px = atoi(thisline[1]);
-    server->py = atoi(thisline[2]);
-    dprintf(tft_client, "PLAYER %d %d %d\r\n", server->log, server->px, server->py);
+    server->px = thisline[1];
+    server->py = thisline[2];
+    dprintf(tft_client, "PLAYER %d %s %s\r\n", server->log, server->px, server->py);
     free_darray(thisline);
 }
 
