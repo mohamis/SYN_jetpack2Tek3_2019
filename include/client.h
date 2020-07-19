@@ -58,20 +58,26 @@ int recv_from(int socket, t_client *client);
 fd_set init_select(int sock);
 int init_sock(char *ip, int port);
 void remove_delim(int socket, char *buff, t_client *server);
-int send_to(int sock, char *cmd, t_client *client);
-int loop_main(int socket, t_client *client, size_t bufsize, size_t characters);
+int send_to(int sock, char *cmd);
+int loop_main(int socket, t_client *client);
 fd_set read_main(fd_set rdfs, int socket);
 int errors(int ac, char **av);
 
-void ready(__attribute__((unused)) char *lines, __attribute__((unused))  t_client *client, int socket);
-void algeo(__attribute__((unused)) char *lines, __attribute__((unused))  t_client *client, int socket);
-void getID(__attribute__((unused)) char *lines, __attribute__((unused))  t_client *client, int socket);
-void player(__attribute__((unused)) char *lines, __attribute__((unused))  t_client *client, int socket);
-void coin(__attribute__((unused)) char *lines, __attribute__((unused))  t_client *client, int socket);
-void fire_dir(__attribute__((unused)) char *lines, __attribute__((unused))  t_client *client, int socket);
-void start(__attribute__((unused)) char *lines, __attribute__((unused))  t_client *client, int socket);
-int init_loopback(int sock, char **lines, t_client *client);
-char *init_loopfront(int sock, t_client *client);
+void ready(__attribute__((unused)) char *lines,
+            __attribute__((unused))  t_client *client, int socket);
+void algeo(__attribute__((unused)) char *lines,
+            __attribute__((unused))  t_client *client, int socket);
+void getID(__attribute__((unused)) char *lines,
+            __attribute__((unused))  t_client *client, int socket);
+void player(__attribute__((unused)) char *lines,
+            __attribute__((unused))  t_client *client, int socket);
+void coin(__attribute__((unused)) char *lines,
+            __attribute__((unused))  t_client *client, int socket);
+void fire_dir(__attribute__((unused)) char *lines,
+            __attribute__((unused))  t_client *client, int socket);
+void start(__attribute__((unused)) char *lines,
+            __attribute__((unused))  t_client *client, int socket);
+void init_loopback(char **lines, t_client *client);
 char *concat(const char *s1, const char *s2);
 
 #endif /* !CLIENT_H_ */

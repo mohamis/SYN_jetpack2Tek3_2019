@@ -62,11 +62,15 @@ void init_struct(server_t *server, char *file)
 int main(int ac, char **av)
 {
     help_errors(ac, av);
-    // server_t *server = malloc(sizeof(server_t));
-    // if (!server)
-    //     exit (84);
-    file = strdup(av[6]);
-    // init_struct(server, file);
-    core(atoi(av[2]));
+    server_t *server = malloc(sizeof(server_t));
+    if (!server)
+        exit (84);
+    char *file = av[6];
+    init_struct(server, file);
+    core(atoi(av[2]), server);
+
+    if (close(tft_server) == -1)
+        perror("error");
+    free(server);
     return 0;
 }

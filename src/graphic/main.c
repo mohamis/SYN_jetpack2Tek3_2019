@@ -8,5 +8,5 @@
 
 int main(int ac, char **av)
 {
-    return(create_window());
+    return (create_window());
 }

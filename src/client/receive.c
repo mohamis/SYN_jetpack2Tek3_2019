@@ -41,7 +41,7 @@ void remove_delim(int socket, char *buff, t_client *server)
 int recv_from(int socket, t_client *client)
 {
     char buffer[5000];
-    // memset(buffer ,0 , 5000);
+    memset(buffer, 0, 5000);
     int n = recv(socket, buffer, 5000, 0);
     char **lines = NULL;
 
@@ -51,15 +51,10 @@ int recv_from(int socket, t_client *client)
     }
     buffer[n] = '\0';
     client->desc = strdup(buffer);
-    // printf("from : %s\n", buffer);
-    // printf("dest : %s\n", client->desc);
     lines = my_str_to_word_array(client->desc, ' ');
-    // printf("lines : %s\n", lines[1]);
-    // printf("lines2 : %s\n", lines[10]);
-    init_loopback(socket, lines, client);
-    // client->store = strdup(buffer);
-    free(lines);
-    // free_darray(lines);
+    init_loopback(lines, client);
+
+    free_darray(lines);
     return (0);
 }
 

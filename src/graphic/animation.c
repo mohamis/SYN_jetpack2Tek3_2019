@@ -8,7 +8,8 @@
 #include "jetpack_graph.h"
 #include <SFML/Graphics/Transform.h>
 
-void movem(window_t *game, sfRectangleShape *rect, int fire, sfVector2f sprite_pos)
+void movem(window_t *game, sfRectangleShape *rect,
+    int fire, sfVector2f sprite_pos)
 {
     if (fire == 1) {
         game->y_move = (-5.0 * game->seconds);
@@ -20,7 +21,8 @@ void movem(window_t *game, sfRectangleShape *rect, int fire, sfVector2f sprite_p
     } else if (fire == 0) {
         if (game->s_gravity == 1) {
             if (sprite_pos.y > 1000.000000)
-                sfRectangleShape_setPosition(rect, (sfVector2f) {sprite_pos.x, 1000});
+                sfRectangleShape_setPosition(rect,
+                    (sfVector2f) {sprite_pos.x, 1000});
             else
                 game->y_move = (game->gravity * game->seconds);
         } else if (game->s_gravity == 2 || sprite_pos.y > 1001.000000) {
@@ -51,8 +53,8 @@ void animation_manager(window_t *window)
         move_player(window, window->rectp2, window->s_fire);
         sfRectangleShape_setFillColor(window->rectp1, sfGreen);
         sfRectangleShape_setFillColor(window->rectp2, sfMagenta);
-        sfRectangleShape_setSize(window->rectp1, (sfVector2f){10,10});
-        sfRectangleShape_setSize(window->rectp2, (sfVector2f){10,10});
+        sfRectangleShape_setSize(window->rectp1, (sfVector2f){10, 10});
+        sfRectangleShape_setSize(window->rectp2, (sfVector2f){10, 10});
         sfClock_restart(window->clock);
     }
 }

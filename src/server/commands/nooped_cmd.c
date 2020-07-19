@@ -7,46 +7,47 @@
 
 #include "jetpack.h"
 
-void ready(__attribute__((unused)) char *lines, __attribute__((unused))  client_t *server, __attribute__((unused)) int socket)
+void ready(__attribute__((unused)) char *lines,
+    __attribute__((unused))  server_t *server)
 {
-    if (server->database->log == 2) {
-        dprintf(socket, "START\r\n");
+    if (strcmp("2", file_stat("./.jetpack.log")) == 0) {
+        dprintf(tft_client, "START\r\n");
     } else {
-        printf("READY\r\n");
-        dprintf(socket, "NOK\r\n");
+        printf("WAITING\r\n");
+        dprintf(tft_client, "WAIT\r\n");
     }
 }
 
-void getID(__attribute__((unused)) char *lines, __attribute__((unused))  client_t *server, __attribute__((unused)) int socket)
+void waiting(__attribute__((unused)) char *lines,
+    __attribute__((unused))  server_t *server)
 {
-    printf("%d\r\n", server->database->log);
-    dprintf(socket, "ID %d\r\n", server->database->log);
+    if (strcmp("2", file_stat("./.jetpack.log")) == 0) {
+        dprintf(tft_client, "START\r\n");
+    } else {
+        printf("WAITING\r\n");
+        dprintf(tft_client, "WAIT\r\n");
+    }
 }
 
-void player(__attribute__((unused)) char *lines, __attribute__((unused))  client_t *server, __attribute__((unused)) int socket)
+void getID(__attribute__((unused)) char *lines,
+    __attribute__((unused))  server_t *server)
+{
+    printf("%d\r\n", server->log);
+    dprintf(tft_client, "ID %d\r\n", server->log);
+}
+
+void player(__attribute__((unused)) char *lines,
+    __attribute__((unused))  server_t *server)
 {
     char **thisline = my_str_to_word_array(lines, ' ');
-    // server->px = thisline[2];
-    // server->py = thisline[3];
-    printf("PLAYER %d %s %s\r\n", server->database->log, thisline[2], thisline[3]);
+    printf("PLAYER %d %s %s\r\n", server->log, thisline[2], thisline[3]);
+    dprintf(tft_client, "PLAYER\r\n");
     free(thisline);
-    // free_darray(thisline);
 }
 
-void coin(__attribute__((unused)) char *lines, __attribute__((unused))  client_t *server, __attribute__((unused)) int socket)
+void coin(__attribute__((unused)) char *lines,
+    __attribute__((unused))  server_t *server)
 {
-    dprintf(socket, "COIN %d %d %d\r\n", server->database->log, server->database->cx, server->database->cy);
-}
-
-void fire_dir(__attribute__((unused)) char *lines, __attribute__((unused))  client_t *server, __attribute__((unused)) int socket)
-{
-    printf("FIRE\r\n");
-}
-
-void start(__attribute__((unused)) char *lines, __attribute__((unused))  client_t *server, __attribute__((unused)) int socket)
-{
-    if (server->database->log == 2) {
-        dprintf(socket, "START\r\n");
-    } else
-        dprintf(socket, "NOK\r\n");
+    dprintf(tft_client, "COIN %d %d %d\r\n", server->log,
+        server->cx, server->cy);
 }

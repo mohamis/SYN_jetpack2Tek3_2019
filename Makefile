@@ -11,17 +11,15 @@ GRAPH	=	graphJ2T3
 
 S_SRC	=	src/server/main.c				\
 			src/server/commands/finish.c 	\
-			src/server/commands/map.c 		\
-			src/server/commands/nooped_cmd.c\
-			src/server/client/client.c		\
+			src/server/commands/commands_ext.c\
 			src/server/parsing/parsing.c 	\
 			src/server/parsing/utils.c 		\
-			src/server/connect/data.c 		\
-			src/server/serv/core.c 			\
-			src/server/serv/server.c 		\
-			src/server/sockets/init.c 		\
+			src/server/sockets/server.c 	\
+			src/server/sockets/sockets.c 	\
+			src/server/commands/map.c 		\
 			src/server/utils/utilities.c 	\
-			src/server/utils/utilities_con.c
+			src/server/utils/utilities_con.c\
+			src/server/commands/nooped_cmd.c
 S_OBJ	=	$(S_SRC:.c=.o)
 
 G_SRC	=	src/graphic/window.c			\
@@ -38,6 +36,7 @@ C_SRC	=	src/client/main.c				\
 			src/client/utils/utilities_con.c\
 			src/client/receive.c			\
 			src/client/commands.c			\
+			src/client/commands_ext.c		\
 			src/client/re_loop.c			\
 			src/graphic/window.c			\
 			src/graphic/animation.c			\

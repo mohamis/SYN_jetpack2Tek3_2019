@@ -17,7 +17,7 @@ int id_cmd(char *buffer, client_t *cli)
         strncmp("ID", array[0], strlen("ID") == 0)) {
             cli->id = atoi(array[1]);
             value = 0;
-        } else 
+        } else
             value = 1;
         free_array(array);
         return (value);
@@ -46,6 +46,4 @@ void fire_cmd(client_t *cli)
         cli->state_fire = 0;
     } else
         cli->state_fire = 1;
-        
 }
-        

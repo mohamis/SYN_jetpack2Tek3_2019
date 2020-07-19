@@ -17,3 +17,4 @@ src/old_client
 *.out
 *.txt
 src/server/aled_server
+.jetpack.log

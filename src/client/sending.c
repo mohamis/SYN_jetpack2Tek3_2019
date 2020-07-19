@@ -1,4 +1,9 @@
-
+/*
+** EPITECH PROJECT, 2020
+** SYN_jetpack2Tek3_2019
+** File description:
+** sending
+*/
 
 #include "client.h"
 #include <ctype.h>
@@ -26,11 +31,8 @@ int init_sock(char *ip, int port)
     return (sock);
 }
 
-int send_to(int sock, char *cmd, t_client *client)
+int send_to(int sock, char *cmd)
 {
-    // remove_delim(sock, cmd, client);
-    // if (strcmp(cmd, "FINISH") == 0)
-    //     exit (0);
     if (send(sock, cmd, strlen(cmd), 0) < 0) {
         perror("send()");
         return (84);

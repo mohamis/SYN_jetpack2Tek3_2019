@@ -14,7 +14,7 @@ t_client *init_client(void)
 
     client->py = 0;
     client->px = 0;
-    client->id = 0;
+    client->id = NULL;
     client->cx = 0;
     client->cy = 0;
     client->status = 0;
@@ -25,9 +25,7 @@ t_client *init_client(void)
 
 int main(int ac, char **av)
 {
-    t_client *client = init_client();;
-    size_t bufsize = 0;
-    size_t characters = 0;
+    t_client *client = init_client();
     int port = 0;
     int socket = 0;
 
@@ -36,7 +34,7 @@ int main(int ac, char **av)
         socket = init_sock(av[2], port);
         if (socket == 84)
             return (84);
-        if (loop_main(socket, client, bufsize, characters) == 84)
+        if (loop_main(socket, client) == 84)
             return (84);
         free(client);
         close(socket);
