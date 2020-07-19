@@ -17,39 +17,78 @@ void loop_map(char **map)
     }
 }
 
+int send_to(int sock, char *cmd)
+{
+    if (send(sock, cmd, strlen(cmd), 0) < 0) {
+        perror("send()");
+        return (84);
+    }
+    return (0);
+}
+
+int count_lines(char *filename, server_t *server)
+{
+    FILE *search = fopen(filename, "r");
+    int size = 0;
+    size_t len = 0;
+    char *dat = NULL;
+    ssize_t read;
+
+    if (!search) {
+        perror(filename);
+        return (NULL);
+    }
+    fseek(search, 0, SEEK_END);
+    size = ftell(search);
+    fseek(search, 0, SEEK_SET);
+    dat = malloc(size);
+    for (server->cy; (read = getline(&dat, &len, search)) != -1; server->cy++) {
+        server->cx = read - 1;
+        // server->cy =+ 1;
+        // printf("%s", data);
+    }
+
+    fclose(search);
+}
+
+char *cread_table(char *filename, server_t *server)
+{
+    FILE *search = fopen(filename, "r");
+    int size = 0;
+    size_t len = 0;
+    char *data = NULL;
+
+    if (!search) {
+        perror(filename);
+        return (NULL);
+    }
+    fseek(search, 0, SEEK_END);
+    size = ftell(search);
+    fseek(search, 0, SEEK_SET);
+    data = malloc(size);
+
+    fread(data, size, 1, search);
+    fclose(search);
+    return (data);
+}
+
+void list(char *filename, int socket, server_t *server)
+{
+    count_lines(filename, server);
+    asprintf(&server->scy,  "%d", server->cy);
+    asprintf(&server->scx,  "%d", server->cx);
+    char *size = concat(server->scy, " ");
+    char *size2 = concat(size, server->scx);
+    char *size3 = concat(size2, " ");
+    char *nfile1 = concat("MAP ", size3);
+    char *nfile3 = concat(nfile1, cread_table(filename, server));
+    // printf("%d\n", server->cy);
+    // printf("%s\n", nfile3);
+
+    send_to(socket, nfile3);
+}
+
 void map_files(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
-    // DIR *d;
-    // struct dirent *dir;
-    char *buffer = NULL;
-    char **map = NULL;
-    long numbytes;
-    // d = opendir(".");
-    FILE *fptr;
-    fptr = fopen(server->pathname, "r"); 
-    if (fptr == NULL) { 
-        exit(84); 
-    }
-    fseek(fptr, 0L, SEEK_END);
-    numbytes = ftell(fptr);
-    fseek(fptr, 0L, SEEK_SET);	
-    buffer = (char*)calloc(numbytes, sizeof(char));	
-    if(buffer == NULL)
-        exit(84);
-    fread(buffer, sizeof(char), numbytes, fptr);
-    // map = my_str_to_word_array(buffer, '\n');
-    printf("%s\n", buffer);
-    // loop_map(map);
-    fclose(fptr);
-    free(buffer);
-    free_darray(map);
-    // if (d) {
-    //     dprintf(tft_client, "150 \r\n");
-    //     dprintf(tft_client, "226 \r\n");
-    //     while ((dir = readdir(d)) != NULL) {
-    //         dprintf(tft_client, "%s\r\n", dir->d_name);
-    //     }
-    //     dprintf(tft_client, "226 \r\n");
-    //     closedir(d);
-    // }
+    list(server->pathname, tft_client, server);
 }

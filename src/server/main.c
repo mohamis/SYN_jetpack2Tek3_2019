@@ -50,7 +50,11 @@ void init_struct(server_t *server, char *file)
 {
     server->cx = 0;
     server->cy = 0;
+    server->scy = NULL;
+    server->scx = NULL;
     server->saved = 0;
+    server->count = 0;
+    server->coin = 0;
     server->px = NULL;
     server->py = NULL;
     server->pathname = file;

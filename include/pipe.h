@@ -12,7 +12,7 @@ static func_t func[] = {
     {"ID", &getID, 1},
     {"FINISH", &quit_finish, 0},
     {"COIN", &coin, 1},
-    {"PLAYER", &player, 1},
+    {"PLAYER", &player, 2},
     {"START", &start, 1},
     {"FIRE", &fire_dir, 1},
     {"READY", &ready, 1},

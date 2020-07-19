@@ -26,8 +26,11 @@ int init_sock(char *ip, int port)
     return (sock);
 }
 
-int send_to(int sock, char *cmd)
+int send_to(int sock, char *cmd, t_client *client)
 {
+    // remove_delim(sock, cmd, client);
+    if (strcmp(cmd, "FINISH") == 0)
+        exit (0);
     if (send(sock, cmd, strlen(cmd), 0) < 0) {
         perror("send()");
         return (84);

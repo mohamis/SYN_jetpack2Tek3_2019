@@ -11,7 +11,7 @@
 
 int read_lines(server_t *server)
 {
-    dprintf(tft_client, "ALLO C LE SERVEUR.\r\n");
+    // dprintf(tft_client, "ALLO C LE SERVEUR.\r\n");
     FILE *file = fdopen(dup(tft_client), "r");
     char *lines = NULL;
     size_t i = 0;

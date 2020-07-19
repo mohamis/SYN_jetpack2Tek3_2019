@@ -1,19 +1,65 @@
-
+/*
+** EPITECH PROJECT, 2020
+** SYN_jetpack2Tek3_2019
+** File description:
+** receive
+*/
 
 #include "client.h"
+#include "c_pipe.h"
 #include <ctype.h>
 
-int recv_from(int socket)
+char *init_buffer(char *lines)
 {
-    char buffer[1024];
-    int n = recv(socket, buffer, sizeof(buffer) - 1, 0);
+    if (strlen(lines) > 0 && lines[strlen(lines) - 1] == '\n')
+        lines[strlen(lines) - 1] = '\0';
+    if (strlen(lines) > 0 && lines[strlen(lines) - 1] == '\r')
+        lines[strlen(lines) - 1] = '\0';
+    return (lines);
+}
+
+void remove_delim(int socket, char *buff, t_client *server)
+{
+    int i = 0;
+    buff = init_buffer(buff);
+    char *lines = strdup(buff);
+    char *parse = strtok(buff, " ");
+    bool is_valid = false;
+
+    while (c_func[i].list) {
+        if (parse != NULL && strcmp(parse, c_func[i].lines) == 0) {
+                c_func[i].list(lines, server, socket);
+            is_valid = true;
+        }
+        i++;
+    }
+    if (is_valid == false)
+        is_valid = false;
+    free(lines);
+}
+
+int recv_from(int socket, t_client *client)
+{
+    char buffer[5000];
+    memset(buffer ,0 , 5000);
+    int n = recv(socket, buffer, 5000, 0);
+    char **lines = NULL;
 
     if (n < 0) {
         perror("recv()");
         return (84);
     }
     buffer[n] = '\0';
-    printf("%s\n", buffer);
+    client->desc = strdup(buffer);
+    // printf("from : %s\n", buffer);
+    // printf("dest : %s\n", client->desc);
+    lines = my_str_to_word_array(client->desc, ' ');
+    // printf("lines : %s\n", lines[1]);
+    // printf("lines2 : %s\n", lines[10]);
+    init_loopback(socket, lines, client);
+    // client->store = strdup(buffer);
+    // free(lines);
+    free_darray(lines);
     return (0);
 }
 

@@ -8,9 +8,24 @@
 #include "client.h"
 #include <ctype.h>
 
-int main(int ac, char **av)
+t_client *init_client(void)
 {
     t_client *client = malloc(sizeof(t_client));
+
+    client->py = 0;
+    client->px = 0;
+    client->id = 0;
+    client->cx = 0;
+    client->cy = 0;
+    client->status = 0;
+    client->fstatus = 0;
+    client->buffer = NULL;
+    return (client);
+}
+
+int main(int ac, char **av)
+{
+    t_client *client = init_client();;
     size_t bufsize = 0;
     size_t characters = 0;
     int port = 0;
@@ -23,6 +38,7 @@ int main(int ac, char **av)
             return (84);
         if (loop_main(socket, client, bufsize, characters) == 84)
             return (84);
+        free(client);
         close(socket);
         return (0);
     } else {

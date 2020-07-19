@@ -34,8 +34,7 @@ void fork_iter(server_t *server)
 
     if (pid == 0) {
         read_lines(server);
-    }
-    else if (close(tft_client) == -1)
+    } else if (close(tft_client) == -1)
         perror("forked close");
 }
 
@@ -57,9 +56,12 @@ void core(int port, server_t *server)
             close(tft_server);
             exit(EXIT_FAILURE);
         } else {
-            if (server->log <= 2)
+            if (server->log < 2) {
                 server->log += 1;
-            fork_iter(server);
+                fork_iter(server);
+            } else {
+                dprintf(tft_client, "FINISH\r\n");
+            }
         }
     }
 }
