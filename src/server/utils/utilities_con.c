@@ -17,3 +17,8 @@ char *concat(const char *s1, const char *s2)
     strcat(result, s2);
     return (result);
 }
+
+void sigint_handler(int sig)
+{
+    signal(sig, SIG_IGN);
+}

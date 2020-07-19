@@ -25,11 +25,15 @@ int loop_main(int socket, t_client *client, size_t bufsize, size_t characters)
 {
         while (1) {
             if (client->status == 0)
-                dprintf(socket, "ID\r\n");
+                send_to(socket, "ID\r\n", client);
             if (client->status == 1)
-                dprintf(socket, "FIRE\r\n");
+                send_to(socket, "MAP\r\n", client);
             if (client->status == 2)
-                dprintf(socket, "MAP\r\n");
+                send_to(socket, "READY\r\n", client);
+            if (client->status == 3)
+                send_to(socket, "PLAYER 1 1 1 1\r\n", client);
+            if (client->status == -1)
+                send_to(socket, "WAIT\r\n", client);
             if (recv_from(socket, client) == 84)
                 return (84);
             // client->rdfs = read_main(client->rdfs, socket);

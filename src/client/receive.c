@@ -41,7 +41,7 @@ void remove_delim(int socket, char *buff, t_client *server)
 int recv_from(int socket, t_client *client)
 {
     char buffer[5000];
-    memset(buffer ,0 , 5000);
+    // memset(buffer ,0 , 5000);
     int n = recv(socket, buffer, 5000, 0);
     char **lines = NULL;
 
@@ -58,8 +58,8 @@ int recv_from(int socket, t_client *client)
     // printf("lines2 : %s\n", lines[10]);
     init_loopback(socket, lines, client);
     // client->store = strdup(buffer);
-    // free(lines);
-    free_darray(lines);
+    free(lines);
+    // free_darray(lines);
     return (0);
 }
 

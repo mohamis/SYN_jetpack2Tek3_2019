@@ -18,7 +18,7 @@ char *init_buffer(char *lines)
     return (lines);
 }
 
-void remove_delim(char *buff, server_t *server)
+void remove_delim(char *buff, client_t *list, int socket)
 {
     int i = 0;
     buff = init_buffer(buff);
@@ -31,7 +31,7 @@ void remove_delim(char *buff, server_t *server)
             // if (func[i].log == 1 && usr != 2)
             //     dprintf(tft_client, "530 Error loging in.\r\n");
             // else
-                func[i].list(lines, server);
+                func[i].list(lines, list, socket);
             is_valid = true;
         }
         i++;

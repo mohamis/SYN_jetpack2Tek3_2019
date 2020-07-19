@@ -13,7 +13,7 @@ static func_t func[] = {
     {"FINISH", &quit_finish, 0},
     {"COIN", &coin, 1},
     {"PLAYER", &player, 2},
-    {"START", &start, 1},
+    {"STATUS", &start, 1},
     {"FIRE", &fire_dir, 1},
     {"READY", &ready, 1},
     {"MAP", &map_files, 0},

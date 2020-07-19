@@ -8,7 +8,7 @@
 #include "jetpack.h"
 #include "sockets.h"
 
-void quit_finish(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
+void quit_finish(__attribute__((unused)) char *lines, __attribute__((unused))  client_t *server, int socket)
 {
-    dprintf(tft_client, "FINISH %d\r\n", server->coin);
+    dprintf(socket, "FINISH %d\r\n", server->database->coin);
 }
