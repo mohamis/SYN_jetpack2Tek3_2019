@@ -8,15 +8,14 @@
 #ifndef PIPE_H_
 #define PIPE_H_
 
-static cmd_t c_func[] = {
+static jet_t c_func[] = {
     {"ID", &getID, 1},
-    {"FINISH", &quit_finish, 0},
     {"COIN", &coin, 1},
-    {"PLAYER", &player, 1},
+    {"PLAYER", &player, 3},
     {"START", &start, 1},
     {"FIRE", &fire_dir, 1},
     {"READY", &ready, 1},
-    {"MAP", &map_files, 1},
+    {"OK", &algeo, 0},
     {NULL, NULL, 0}
 };
 

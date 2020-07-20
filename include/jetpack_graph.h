@@ -4,12 +4,12 @@
 ** File description:
 ** jetpack_graph
 */
-#include <SFML/Graphics.h>
-#include <SFML/Window/Event.h>
-#include <SFML/Audio.h>
 
 #ifndef JETPACK_GRAPH_H_
 #define JETPACK_GRAPH_H_
+#include <SFML/Graphics.h>
+#include <SFML/Window/Event.h>
+#include <SFML/Audio.h>
 #include <stdlib.h>
 /* Structures */
 typedef struct window {

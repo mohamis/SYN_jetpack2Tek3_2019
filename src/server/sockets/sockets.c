@@ -11,7 +11,6 @@
 
 int read_lines(server_t *server)
 {
-    dprintf(tft_client, "ALLO C LE SERVEUR.\r\n");
     FILE *file = fdopen(dup(tft_client), "r");
     char *lines = NULL;
     size_t i = 0;
@@ -21,12 +20,9 @@ int read_lines(server_t *server)
             fclose(file);
         } else {
             remove_delim(lines, server);
-            if (strcmp(lines, "FINISH") == 0 )
+            if (strcmp(lines, "FINISH") == 0)
                 break;
-            free(lines);
         }
-        // fprintf(stderr, "%d", server->log);
-        //ici ajouter un concat des donnees log et lines pour send to other client
     }
     free(lines);
     fclose(file);
@@ -43,15 +39,15 @@ void sockets_init(int port)
 
     if (bind(tft_server, (const struct sockaddr *)&address,
             sizeof(address)) < 0) {
-            close(tft_server); 
+            close(tft_server);
             exit(EXIT_FAILURE);
     }
 }
 
-void listen_lines()
+void listen_lines(void)
 {
     if (listen(tft_server, MAX_CLIENT) == -1) {
         close(tft_server);
         perror("listen()");
-    }   
+    }
 }

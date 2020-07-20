@@ -24,7 +24,7 @@ void check_protocol(int port, proto_t *proto)
     }
     sockets_init(port);
     listen_lines();
-} 
+}
 
 void fork_iter(server_t *server)
 {
@@ -34,9 +34,41 @@ void fork_iter(server_t *server)
 
     if (pid == 0) {
         read_lines(server);
-    }
-    else if (close(tft_client) == -1)
+    } else if (close(tft_client) == -1)
         perror("forked close");
+}
+
+char *file_stat(char *filename)
+{
+    FILE *search = fopen(filename, "r");
+    int size = 0;
+    char *data = NULL;
+
+    if (!search) {
+        perror(filename);
+        exit(EXIT_FAILURE);
+    }
+    fseek(search, 0, SEEK_END);
+    size = ftell(search);
+    fseek(search, 0, SEEK_SET);
+    data = malloc(size);
+
+    fread(data, size, 1, search);
+    fclose(search);
+    return (data);
+}
+
+void file_wstat(char *filename, int stat_)
+{
+    FILE *search = fopen(filename, "w");
+
+    if (!search) {
+        perror(filename);
+        exit(EXIT_FAILURE);
+    }
+
+    fprintf(search, "%d", stat_);
+    fclose(search);
 }
 
 void core(int port, server_t *server)
@@ -57,9 +89,13 @@ void core(int port, server_t *server)
             close(tft_server);
             exit(EXIT_FAILURE);
         } else {
-            if (server->log <= 2)
+            if (server->log < 2) {
                 server->log += 1;
-            fork_iter(server);
+                file_wstat("./.jetpack.log", server->log);
+                fork_iter(server);
+            } else {
+                dprintf(tft_client, "FINISH\r\n");
+            }
         }
     }
 }

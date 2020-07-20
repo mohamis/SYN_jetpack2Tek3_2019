@@ -86,8 +86,3 @@ int create_window(void)
     free(message);
     return (0);
 }
-
-int main(void)
-{
-    return (create_window());
-}

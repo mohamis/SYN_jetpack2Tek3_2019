@@ -7,19 +7,83 @@
 
 #include "jetpack.h"
 
+void loop_map(char **map)
+{
+    for (int x = 0; map[x] != NULL; x++) {
+        for (int y = 0; map[x][y] != '\0'; y++) {
+            // printf("%c", map[x][y]);
+            dprintf(tft_client, "%c", map[x][y]);
+        }
+    }
+}
+
+int send_to(int sock, char *cmd)
+{
+    if (send(sock, cmd, strlen(cmd), 0) < 0) {
+        perror("send()");
+        return (84);
+    }
+    return (0);
+}
+
+void count_lines(char *filename, server_t *server)
+{
+    FILE *search = fopen(filename, "r");
+    int size = 0;
+    size_t len = 0;
+    char *dat = NULL;
+    ssize_t read;
+
+    if (!search) {
+        perror(filename);
+        exit (84);
+    }
+    fseek(search, 0, SEEK_END);
+    size = ftell(search);
+    fseek(search, 0, SEEK_SET);
+    dat = malloc(size);
+    for (; (read = getline(&dat, &len, search)); server->cy++) {
+        server->cx = read - 1;
+    }
+    fclose(search);
+}
+
+char *cread_table(char *filename)
+{
+    FILE *search = fopen(filename, "r");
+    int size = 0;
+    char *data = NULL;
+
+    if (!search) {
+        perror(filename);
+        return (NULL);
+    }
+    fseek(search, 0, SEEK_END);
+    size = ftell(search);
+    fseek(search, 0, SEEK_SET);
+    data = malloc(size);
+
+    fread(data, size, 1, search);
+    fclose(search);
+    return (data);
+}
+
+void list(char *filename, int socket, server_t *server)
+{
+    count_lines(filename, server);
+    asprintf(&server->scy,  "%d", server->cy);
+    asprintf(&server->scx,  "%d", server->cx);
+    char *size = concat(server->scy, " ");
+    char *size2 = concat(size, server->scx);
+    char *size3 = concat(size2, " ");
+    char *nfile1 = concat("MAP ", size3);
+    char *nfile3 = concat(nfile1, cread_table(filename));
+    printf("%d\r\n", server->log);
+
+    send_to(socket, nfile3);
+}
+
 void map_files(__attribute__((unused)) char *lines, __attribute__((unused))  server_t *server)
 {
-    DIR *d;
-    struct dirent *dir;
-    d = opendir(".");
-
-    if (d) {
-        dprintf(tft_client, "150 \r\n");
-        dprintf(tft_client, "226 \r\n");
-        while ((dir = readdir(d)) != NULL) {
-            dprintf(tft_client, "%s\r\n", dir->d_name);
-        }
-        dprintf(tft_client, "226 \r\n");
-        closedir(d);
-    }
+    list(server->pathname, tft_client, server);
 }

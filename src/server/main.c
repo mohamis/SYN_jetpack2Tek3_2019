@@ -10,7 +10,7 @@
 
 int errors(int ac, char **av)
 {
-    FILE *file;
+    struct stat file_stat;
 
     if (ac == 7) {
         int n = strlen(av[2]);
@@ -18,9 +18,8 @@ int errors(int ac, char **av)
             if (!isdigit(av[2][i])) {
                 exit (84);
             }
-        } if ((file = fopen(av[6],"r")) == NULL) {
-            fclose(file);
-            exit(84);
+        } if (stat(av[6], &file_stat) == -1) {
+            exit (84);
         }
     } else {
         exit (84);
@@ -46,13 +45,18 @@ void help_errors(int ac, char **av)
     }
 }
 
-void init_struct(server_t *server)
+void init_struct(server_t *server, char *file)
 {
     server->cx = 0;
     server->cy = 0;
+    server->scy = NULL;
+    server->scx = NULL;
     server->saved = 0;
-    server->px = 0;
-    server->py = 0;
+    server->count = 0;
+    server->coin = 0;
+    server->px = NULL;
+    server->py = NULL;
+    server->pathname = file;
 }
 
 int main(int ac, char **av)
@@ -60,8 +64,9 @@ int main(int ac, char **av)
     help_errors(ac, av);
     server_t *server = malloc(sizeof(server_t));
     if (!server)
-        exit(84);
-    init_struct(server);
+        exit (84);
+    char *file = av[6];
+    init_struct(server, file);
     core(atoi(av[2]), server);
 
     if (close(tft_server) == -1)

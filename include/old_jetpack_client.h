@@ -25,8 +25,16 @@
 
 typedef struct client_s
 {
+    int id;
+    char *map;
+    int widht;
+    int height;
+    char player;
+    int state_fire;
+    int finish;
 } client_t;
 #endif
 
 int my_isnum(char *str);
 int manage_args(int ac, char **av);
+void free_array(char **array);
